@@ -84,6 +84,158 @@ ft.app(main)
   </TabItem>
 </Tabs>
 
+### Container Image and Blend Mode Explained
+
+#### What is blend modes?
+
+We categorize blending modes into five sections based on their main outcome: Darker, Lighter, Contrast, Color, and Comparative.
+
+##### Darker
+Blend modes under Darker will help you amplify dark colors in your designs. Here’s a quick run-through of the options available to you:
+
+**Darken:** keeps the darkest colors between the blend and base layers.
+**Multiply:** keeps only the darker colors of the blend layer and makes light colors less opaque. The resulting color is always darker, except for where it’s pure white.
+**Color Burn:** uses the colors from the blend layer to darken the base layer and increases the contrast between the two. Blending with white produces no change.
+**Plus Darker:** works like Darken but with a stronger impact on mid-tones.
+Darker blend modes are great for working with shadows or dark base layers. You can use them to create a more realistic and dynamic shadow effect or to add depth and texture to an image.
+
+##### Lighter
+Blend modes under Lighter will help you amplify light colors in your designs. Let’s take a look at the blend modes in this section.
+
+**Lighten:** keeps the lightest colors between the blend and base layers. It’ll only lighten if the top layer is lighter than the brightness or luminance of the bottom layer.
+**Screen:** keeps only the white and lighter colors of the blend layer and makes black or dark colors less opaque. In other words, it multiplies the inverse of the base and blend colors, giving a lighter result except for where it’s pure black.
+**Color Dodge:** uses the colors from the blend layer to lighten the base layer, reducing the contrast between the two. Blending with black won’t produce any change.
+**Plus Lighter:** works like Lighten but with a stronger impact on mid-tones.
+Lighter blend modes are great for creating a shining effect or increasing the brightness of an image.
+
+##### Contrast
+Blend modes under Contrast are all about having the base and blend layers play off of each other. Here are the blend modes you can find in this section:
+
+**Overlay:** works like Multiply if the base layer is darker or like Screen if it’s lighter.
+**Hard Light:** combines Multiply and Screen using the brightness values of the top layer to make its calculations, whereas Overlay uses the base layer.
+**Soft Light:** Similar to Overlay, it applies either a darkening or lightening effect based on the luminance values, but more subtle, without the harsh contrast.
+Contrast blend modes are great for adding depth and dynamism to your images. For example, you can combine them with a Gaussian blur and use them to add a soft glow to a portrait photograph. 
+
+##### Comparative
+Blend modes under Comparative basically invert white or light colors. Here’s a quick run-through of the blend modes in this section:
+
+**Difference:** subtracts the blend color from the base or vice versa, depending on which is brighter. When two pixels are the same, the result will be black.
+**Exclusion:** behaves much the same way as Difference, but with less contrast between the layers because it doesn’t invert mid-tones.
+Comparative blend modes are useful for creating subtle layered effects or inverting colors. You can also use them to test the difference between colors — if you’re into the scientific side of design.
+
+##### Color
+Blend modes under Color play with hues, saturation and brightness to help bring your designs to life. Here’s an overview of the blend modes in this section:
+
+**Hue:** uses the blend layer’s hue while preserving the saturation and brightness of the base layer.
+**Saturation:** uses the blend layer’s levels of saturation but keeps the hue and brightness of the base layer.
+**Color:** uses the blend layer’s hue and saturation while preserving the brightness of the base layers.
+**Luminosity:** uses the base layer’s brightness while preserving the hue and saturation of the base layer, creating the inverse effect of Color.
+Color blend modes are great for photo editing. For example, you can use it to add warmth to a cool-toned photo or to create a retro look by desaturating the colors.
+
+---
+
+
+![Ekran görüntüsü_2024-09-23_12-14-31](https://github.com/user-attachments/assets/5ce60993-1ccc-4732-a0a7-8fe1cc152510)
+
+<Tabs groupId="language">
+  <TabItem value="python" label="Python" default>
+    ```python
+    import flet as ft
+
+
+def main(page: ft.Page):
+    page.title="Using Blend Mode Demo"
+
+    def dd1_changed(e):
+        cnt2.image.color_filter.blend_mode=e.control.value
+        cnt2.update()
+
+    dd1=ft.Dropdown(
+        width=250,
+        label="Select blend mode",
+        autofocus=True,
+        on_change=dd1_changed,
+        options=[
+            ft.dropdown.Option("clear"),
+            ft.dropdown.Option("color"),
+            ft.dropdown.Option("colorBurn"),
+            ft.dropdown.Option("colorDodge"),
+            ft.dropdown.Option("difference"),
+            ft.dropdown.Option("dst"),
+            ft.dropdown.Option("dstATop"),
+            ft.dropdown.Option("dstIn"),
+            ft.dropdown.Option("dstOut"),
+            ft.dropdown.Option("dstOver"),
+            ft.dropdown.Option("exclusion"),
+            ft.dropdown.Option("hardLight"),
+            ft.dropdown.Option("hue"),
+            ft.dropdown.Option("lighten"),
+            ft.dropdown.Option("luminosity"),
+            ft.dropdown.Option("multiply"),
+            ft.dropdown.Option("overlay"),
+            ft.dropdown.Option("plus"),
+            ft.dropdown.Option("saturation"),
+            ft.dropdown.Option("softLight"),
+            ft.dropdown.Option("src"),
+            ft.dropdown.Option("srcATop"),
+            ft.dropdown.Option("srcIn"),
+            ft.dropdown.Option("srcOut"),
+            ft.dropdown.Option("srcOver"),
+            ft.dropdown.Option("values"),
+            ft.dropdown.Option("xor"),
+        ]
+    )
+
+    cnt1 = ft.Container(
+        width=300,
+        height=300,
+        bgcolor=ft.colors.ORANGE,
+        image=ft.DecorationImage(
+            src=f"https://picsum.photos/200/200?15"
+        )
+    )
+
+    cnt2 = ft.Container(
+        width=300,
+        height=300,
+        bgcolor=ft.colors.ORANGE,
+        image=ft.DecorationImage(
+            src=f"https://picsum.photos/200/200?15",
+            color_filter=ft.ColorFilter(
+                color=ft.colors.ORANGE,
+                blend_mode=None
+            ),
+        ),
+
+    )
+
+    page.add(
+        ft.Container(
+            width=float("inf"),
+            content=ft.Text(
+                "BLEND MODE EXPLAINED",
+                text_align=ft.TextAlign.CENTER,
+                style=ft.TextStyle(size=26)
+            ),
+        ),
+        ft.Divider(),
+        ft.Row(controls=[
+            ft.Text("Choose Blend Mode"),
+            dd1
+        ]),
+        ft.Divider(),
+        ft.Row(controls=[
+            cnt1, cnt2
+        ]))
+
+
+ft.app(target=main)
+
+    ```
+  </TabItem>  
+</Tabs>
+
+
 ## Properties
 
 <img src="/img/docs/controls/container/container-diagram.png" className="screenshot-50" />
