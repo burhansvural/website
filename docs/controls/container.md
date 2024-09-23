@@ -84,6 +84,111 @@ ft.app(main)
   </TabItem>
 </Tabs>
 
+---
+
+### Container Image and Blend Mode Explained
+
+![Ekran görüntüsü_2024-09-23_12-14-31](https://github.com/user-attachments/assets/5ce60993-1ccc-4732-a0a7-8fe1cc152510)
+
+<Tabs groupId="language">
+  <TabItem value="python" label="Python" default>
+    ```python
+    import flet as ft
+
+
+def main(page: ft.Page):
+    page.title="Using Blend Mode Demo"
+
+    def dd1_changed(e):
+        cnt2.image.color_filter.blend_mode=e.control.value
+        cnt2.update()
+
+    dd1=ft.Dropdown(
+        width=250,
+        label="Select blend mode",
+        autofocus=True,
+        on_change=dd1_changed,
+        options=[
+            ft.dropdown.Option("clear"),
+            ft.dropdown.Option("color"),
+            ft.dropdown.Option("colorBurn"),
+            ft.dropdown.Option("colorDodge"),
+            ft.dropdown.Option("difference"),
+            ft.dropdown.Option("dst"),
+            ft.dropdown.Option("dstATop"),
+            ft.dropdown.Option("dstIn"),
+            ft.dropdown.Option("dstOut"),
+            ft.dropdown.Option("dstOver"),
+            ft.dropdown.Option("exclusion"),
+            ft.dropdown.Option("hardLight"),
+            ft.dropdown.Option("hue"),
+            ft.dropdown.Option("lighten"),
+            ft.dropdown.Option("luminosity"),
+            ft.dropdown.Option("multiply"),
+            ft.dropdown.Option("overlay"),
+            ft.dropdown.Option("plus"),
+            ft.dropdown.Option("saturation"),
+            ft.dropdown.Option("softLight"),
+            ft.dropdown.Option("src"),
+            ft.dropdown.Option("srcATop"),
+            ft.dropdown.Option("srcIn"),
+            ft.dropdown.Option("srcOut"),
+            ft.dropdown.Option("srcOver"),
+            ft.dropdown.Option("values"),
+            ft.dropdown.Option("xor"),
+        ]
+    )
+
+    cnt1 = ft.Container(
+        width=300,
+        height=300,
+        bgcolor=ft.colors.ORANGE,
+        image=ft.DecorationImage(
+            src=f"https://picsum.photos/200/200?15"
+        )
+    )
+
+    cnt2 = ft.Container(
+        width=300,
+        height=300,
+        bgcolor=ft.colors.ORANGE,
+        image=ft.DecorationImage(
+            src=f"https://picsum.photos/200/200?15",
+            color_filter=ft.ColorFilter(
+                color=ft.colors.ORANGE,
+                blend_mode=None
+            ),
+        ),
+
+    )
+
+    page.add(
+        ft.Container(
+            width=float("inf"),
+            content=ft.Text(
+                "BLEND MODE EXPLAINED",
+                text_align=ft.TextAlign.CENTER,
+                style=ft.TextStyle(size=26)
+            ),
+        ),
+        ft.Divider(),
+        ft.Row(controls=[
+            ft.Text("Choose Blend Mode"),
+            dd1
+        ]),
+        ft.Divider(),
+        ft.Row(controls=[
+            cnt1, cnt2
+        ]))
+
+
+ft.app(target=main)
+
+    ```
+  </TabItem>  
+</Tabs>
+
+
 ## Properties
 
 <img src="/img/docs/controls/container/container-diagram.png" className="screenshot-50" />
